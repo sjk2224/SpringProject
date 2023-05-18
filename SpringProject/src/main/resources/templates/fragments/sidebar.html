@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <header th:fragment="headerFragment" style="width: 280px; height: 100%">
   <head>
     <title>Sidebars · Bootstrap v5.3</title>
@@ -81,7 +81,6 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="sidebars.css" rel="stylesheet">
   </head>
   
   <body>
@@ -95,40 +94,23 @@
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-          Home
-        </a>
-      </li>
       <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+        <a th:href="@{AlbumList(page=1)}" class="nav-link text-white">
+          <svg class="bi pe-none me-2" width="16" height="16">
+          </svg>
           Dashboard
         </a>
       </li>
       <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-          Orders
+        <a  th:href="@{Create}" class="nav-link text-white">
+          <svg class="bi pe-none me-2" width="16" height="16">
+          </svg>
+          Create
         </a>
       </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-          Customers
-        </a>
-      </li>
-    </ul>
+      </ul>
   </div>
 
-    <script src="sidebars.js"></script>
   </body>
   </header>
 </html>

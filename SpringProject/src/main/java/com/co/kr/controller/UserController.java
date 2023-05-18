@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.co.kr.domain.AlbumListDomain;
+import com.co.kr.domain.AlbumListFileDomain;
 import com.co.kr.domain.LoginDomain;
+import com.co.kr.service.UploadService;
 import com.co.kr.service.UserService;
 import com.co.kr.util.CommonUtils;
 import com.co.kr.vo.LoginVO;
@@ -30,16 +33,17 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private UploadService uploadService;
+	
 	// 진입점
 	@GetMapping("/")
 	public String index(){
 		return "index.html";
 	}
-	@GetMapping("/about")
-	public String about(){
-		return "about.html";
-	}
-	@RequestMapping(value = "login")
+
+	
+	@RequestMapping(value = "album")
 	public ModelAndView login(LoginVO loginDTO, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		//session 처리 
@@ -70,7 +74,11 @@ public class UserController {
 		session.setAttribute("id", loginDomain.getMbId());
 		session.setAttribute("mbLevel", loginDomain.getMbLevel());
 
-		mav.setViewName("about.html"); 
+		List<AlbumListFileDomain> items = uploadService.albumFileViewList();
+		System.out.println("items ==> " + items);
+		mav.addObject("items",items);
+		
+		mav.setViewName("board/album.html"); 
 		
 		return mav;
 	};
