@@ -35,8 +35,15 @@ public interface UploadService {
 	//Remove File
 	public void AlbumFileRemove(AlbumFileDomain albumFileDomain);
 	
+	//Member Remove Album
+	public void MemberAlbumURLRemove(Map<String, String> map);
+		
+	//Member Remove File
+	public void MemberAlbumFileRemove(Map<String, String> map);
+	
 	public AlbumListDomain AlbumSelectOne(HashMap<String, Object> map);
 	
 	public List<AlbumFileDomain> AlbumSelectOneFile(HashMap<String, Object> map);
 	
+	public List<AlbumFileDomain> MemberAlbumFileList(Map<String, String> map);
 }

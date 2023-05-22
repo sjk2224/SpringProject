@@ -43,8 +43,17 @@ public interface UploadMapper {
 	//file Delete
 	public void AlbumFileRemove(AlbumFileDomain albumFileDomain);
 	
+	//Member Album Delete
+	public void MemberAlbumURLRemove(Map<String, String> map);
+		
+	//Member file Delete
+	public void MemberAlbumFileRemove(Map<String,String> map);
+		
 	public AlbumListDomain AlbumSelectOne(HashMap<String, Object> map);
 	
 	public List<AlbumFileDomain> AlbumSelectOneFile(HashMap<String, Object> map);
 	
+	//Read (Album File Member) 
+	public List<AlbumFileDomain> MemberAlbumFileList(Map<String, String> map);	
+		
 }

@@ -194,8 +194,6 @@ public class UploadServiceImple implements UploadService{
 
 	@Override
 	public List<AlbumListFileDomain> albumFileViewList(HashMap<String, String> map) {
-		// TODO Auto-generated method stub
-		System.out.println("pass2");
 		return uploadMapper.albumFileViewList(map);
 	}
 
@@ -203,6 +201,23 @@ public class UploadServiceImple implements UploadService{
 	public List<AlbumListFileDomain> albumFileViewListPage(Map<String, Integer> map) {
 		// TODO Auto-generated method stub
 		return uploadMapper.albumFileViewListPage(map);
+	}
+
+	@Override
+	public void MemberAlbumURLRemove(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		uploadMapper.MemberAlbumURLRemove(map);
+	}
+
+	@Override
+	public void MemberAlbumFileRemove(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		uploadMapper.MemberAlbumFileRemove(map);
+	}
+
+	@Override
+	public List<AlbumFileDomain> MemberAlbumFileList(Map<String, String> map) {
+		return uploadMapper.MemberAlbumFileList(map);
 	}
 
 	

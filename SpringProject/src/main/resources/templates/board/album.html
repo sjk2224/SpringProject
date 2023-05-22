@@ -100,7 +100,7 @@
   <div class="album py-5 bg-body-tertiary">
   <form action="Search" method="post">
   <div class="input-group mb-3 w-100">
-	  <input type="text" class="form-control" name="searchWord" id="searchWord" aria-describedby="button-addon2">
+	  <input type="text" class="form-control" th:value="${searchWord}" name="searchWord" id="searchWord" aria-describedby="button-addon2">
 	  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
   </div>
   </form>

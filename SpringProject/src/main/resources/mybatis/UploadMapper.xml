@@ -98,6 +98,15 @@
 	    DELETE FROM jsp.songfiles WHERE up_new_file_name = #{upNewFileName}
 	</delete>
 	
+	<!-- Member URL delete -->
+	<delete id="MemberAlbumURLRemove" parameterType="map">
+       DELETE FROM jsp.songboard WHERE mb_id=#{mbId}
+    </delete>
+	<!-- Member file delete -->
+    <delete id="MemberAlbumFileRemove" parameterType="map">
+	    DELETE FROM jsp.songfiles WHERE mb_id = #{mbId}
+	</delete>
+	
 	<!-- URL -->
 	<select id="AlbumSelectOne" resultType="com.co.kr.domain.AlbumListDomain" parameterType="map">
     	SELECT song_seq, mb_id, song_title, song_singer, song_url , song_create_at, song_update_at
@@ -108,6 +117,12 @@
 	<select id="AlbumSelectOneFile" resultType="com.co.kr.domain.AlbumFileDomain" parameterType="map">
 	    SELECT song_seq, mb_id, up_original_file_name, up_new_file_name, up_file_path, up_file_size
 	    FROM jsp.view_songboard where song_seq = #{SongSeq}
+	</select>
+	
+	<!--Member file all-->
+	<select id="MemberAlbumFileList" parameterType="map" resultType="com.co.kr.domain.AlbumFileDomain">
+	  SELECT song_seq,mb_id,up_original_file_name,up_new_file_name,up_file_path,up_file_size
+	  FROM jsp.songfiles where mb_id=#{mbId}
 	</select>
 	
 </mapper>

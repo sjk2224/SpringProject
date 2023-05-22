@@ -57,7 +57,7 @@ public class AlbumListController {
 			page = "1";
 		
 		if(searchWord == null) {
-			searchWord = "%";
+			searchWord = "";
 		}
 	
 		System.out.println("search word : " + searchWord);
@@ -244,8 +244,8 @@ public class AlbumListController {
 	public ModelAndView Search(@RequestParam String searchWord) throws IOException{
 		ModelAndView mav = new ModelAndView();
 		System.out.println("search word 1 : " +searchWord);
-		if(searchWord == null || searchWord == "") {
-			searchWord = "%";
+		if(searchWord == null) {
+			searchWord = "";
 		}
 		String searchString= URLEncoder.encode(searchWord,"UTF-8");
 		String redicrectPath = "redirect:/AlbumList?page=1&searchWord=" + searchString;

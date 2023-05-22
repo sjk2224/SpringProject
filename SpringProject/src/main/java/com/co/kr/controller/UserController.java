@@ -1,6 +1,10 @@
 package com.co.kr.controller;
 
 import java.io.IOException;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,9 +22,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.co.kr.code.Code;
+import com.co.kr.domain.AlbumFileDomain;
 import com.co.kr.domain.AlbumListDomain;
 import com.co.kr.domain.AlbumListFileDomain;
 import com.co.kr.domain.LoginDomain;
+import com.co.kr.exception.RequestException;
 import com.co.kr.service.UploadService;
 import com.co.kr.service.UserService;
 import com.co.kr.util.CommonUtils;
@@ -150,7 +158,25 @@ public class UserController {
 		Map<String,String> map= new HashMap<String, String>();
 		
 		map.put("mbId", session.getAttribute("id").toString());
-	
+		
+		List<AlbumFileDomain> fileList = uploadService.MemberAlbumFileList(map);
+		System.out.println("pass");
+		
+		for(AlbumFileDomain list : fileList) {
+			list.getUpFilePath();
+			Path filePath = Paths.get(list.getUpFilePath());
+			
+			try {
+				Files.deleteIfExists(filePath);
+			}catch(DirectoryNotEmptyException e) {
+				throw RequestException.fire(Code.E404,"디렉토리가 존재하지 않습니다.",HttpStatus.NOT_FOUND);
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		uploadService.MemberAlbumFileRemove(map);
+		uploadService.MemberAlbumURLRemove(map);
+		
 		userService.mbRemove(map);
 		
 		mav.setViewName("redirect:/");
@@ -193,4 +219,12 @@ public class UserController {
 		return mav;
 	};
 	
+	@RequestMapping("Logout")
+	public ModelAndView Logout(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		session.invalidate();
+		mav.setViewName("index.html");
+		return mav;
+	}
 }
