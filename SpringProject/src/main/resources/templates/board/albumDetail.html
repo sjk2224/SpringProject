@@ -103,16 +103,16 @@
 	      <div class="col-md-7 col-lg-8">
 	        <form class="needs-validation" novalidate>
 	          <div class="row g-3">
-	            <div class="col-sm-6">
+	            <div class="col-12">
 	              <label for="firstName" class="form-label">Song Title</label>
 	              <input type="hidden" th:field="*{Songseq}"/>
 	              <input type="hidden" th:field="*{SongisEdit}"/>
                    <input type="text" class="form-control" th:field="*{Songtitle}" placeholder="노래 제목" required>
 	            </div>
 	
-	            <div class="col-sm-6">
+	            <div class="col-12">
 	              <label for="lastName" class="form-label">Singer</label>
-	              <input type="text" name="SongSinger" class="form-control" th:field="*{SongSinger}" placeholder="가수" required>
+	              <textarea colspan="2" name="SongSinger" th:field="*{SongSinger}" placeholder="가수를 적어주세요" rows="5" cols="103" required></textarea>
 	            </div>
 	
 	            <div class="col-12">

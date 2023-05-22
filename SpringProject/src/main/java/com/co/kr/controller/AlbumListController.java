@@ -99,7 +99,7 @@ public class AlbumListController {
 				map.put("searchWord", SearchWord);
 				
 			List<AlbumListFileDomain> items = uploadService.albumFileViewListPage(map);
-			System.out.println("item.size ==> " + items.size());
+			System.out.println("endpage==> " + pagination.get("endpage"));
 			System.out.println("items ==> " + items);
 			
 			mav.addObject("itemsNotEmpty", itemsNotEmpty);

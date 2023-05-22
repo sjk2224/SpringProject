@@ -99,18 +99,18 @@
 <div layout:fragment="content">
   <div class="album py-5 bg-body-tertiary">
   <form action="Search" method="post">
-  <div class="input-group mb-3 w-100">
+  <div class="input-group mb-3" style="width:50rem; margin-left:10px">
 	  <input type="text" class="form-control" th:value="${searchWord}" name="searchWord" id="searchWord" aria-describedby="button-addon2">
 	  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">검색</button>
   </div>
   </form>
-    <div class="container">
+    <div class="container"  style="width:200rem">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
         <th:block th:if="${items}">
 	        <div class="col"  th:each="item : ${items}">
-	          <div class="card shadow-sm h-100" style="width: 20rem;">         
+	          <div class="card shadow-sm h-100" style="width: 20rem; margin-right:350px">         
 	          	<div th:if="${item.SongSeq}">
-	          		<div  class="card ratio ratio-16x9" style="width: 18rem;">
+	          		<div  class="card ratio ratio-16x9" style="width: 18rem; margin:5px">
 					  <img  th:src="@{${item.upNewFileName}}" class="card-img-top max-h-100" width="50%" height="100%" dy=".3em">
 					</div>
 		            <div class="card-body">
@@ -120,7 +120,6 @@
 		                  <a th:href="@{/Edit(SongSeq=${item.SongSeq})}"><button type="button" class="btn btn-sm btn-outline-secondary" >Edit</button></a>
 		                  <a th:href="@{/Remove(SongSeq=${item.SongSeq})}"><button type="button" class="btn btn-sm btn-outline-secondary">Delete</button></a>
 		                </div>
-		                <small class="text-body-secondary" th:text="${item.SongCreateAt}"></small>
 		                <small class="text-body-secondary" th:text="${item.SongUpdateAt}"></small>
 		              </div>
 	            	</div>
@@ -132,25 +131,25 @@
    </div>    
 </div>
 <nav aria-label="Page navigation example">
-<div th:if=${itemsNotEmpty} class="pagination">
+<div th:if=${itemsNotEmpty} class="pagination" style="margin-left:10px">
   <ul class="pagination align-self-center">
-  	<th:block th:switch="${startpage} <= ${endpage}">
+  	<th:block th:if="${startpage} <= ${endpage}">
 	    <li class="page-item">
 	    	<a class="page-link" th:href="@{AlbumList(page=${1},searchWord=${searchWord})}">처음으로</a>
 	    </li>
-	    <li class="page-item" th:case="(${rowNUM} - 2) > 0" style="display: disable;">
+	    <li class="page-item" th:if="(${rowNUM} - 2) > 0" style="display: disable;">
 	    	<a class="page-link" th:text="${rowNUM - 2}" th:href="@{AlbumList(page=${rowNUM - 2},searchWord=${searchWord})}">1</a>
 	    </li>
-	    <li class="page-item" th:case="(${rowNUM} - 1) > 0" style="display: disable;">
+	    <li class="page-item" th:if="(${rowNUM} - 1) > 0" style="display: disable;">
 	    	<a class="page-link" th:text="${rowNUM - 1}" th:href="@{AlbumList(page=${rowNUM - 1},searchWord=${searchWord})}">2</a>
 	    </li>
 	    <li class="page-item disabled">
 	    	<a class="page-link" th:text="${rowNUM}" th:href="@{AlbumList(page=${rowNUM})}">3</a>
 	    </li>
-	    <li class="page-item" th:case="${rowNUM + 1} <= ${endpage}" style="display: disable;">
+	    <li class="page-item" th:if="${rowNUM + 1} <= ${endpage}" style="display: disable;">
 	    	<a class="page-link" th:text="${rowNUM + 1}" th:href="@{AlbumList(page=${rowNUM + 1},searchWord=${searchWord})}">4</a>
     	</li>
-	    <li class="page-item" th:case="${rowNUM + 2} <= ${endpage}" style="display: disable;">
+	    <li class="page-item" th:if="${rowNUM + 2} <= ${endpage}" style="display: disable;">
 	    	<a class="page-link" th:text="${rowNUM + 2}" th:href="@{AlbumList(page=${rowNUM + 2},searchWord=${searchWord})}">5</a>
 	    </li>
 	    <li class="page-item"><a class="page-link" th:href="@{AlbumList(page=${endpage},searchWord=${searchWord})}">끝으로</a></li> 
