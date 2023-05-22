@@ -2,6 +2,7 @@ package com.co.kr.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,9 @@ public interface UploadService {
 	
 	//Read (Album File View)
 	public List<AlbumListFileDomain> albumFileViewList();
+	
+	//Read (Album File View Page)
+	public List<AlbumListFileDomain> albumFileViewListPage(Map<String, Integer> map);
 	
 	//Insert and Update
 	public int fileProcess(FileListVO fileListVO, MultipartHttpServletRequest request, HttpServletRequest httpReq);

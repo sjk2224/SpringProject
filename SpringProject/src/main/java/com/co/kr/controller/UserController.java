@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +23,7 @@ import com.co.kr.domain.LoginDomain;
 import com.co.kr.service.UploadService;
 import com.co.kr.service.UserService;
 import com.co.kr.util.CommonUtils;
+import com.co.kr.vo.FileListVO;
 import com.co.kr.vo.LoginVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +45,72 @@ public class UserController {
 		return "index.html";
 	}
 
+	@RequestMapping(value = "signin")
+	public String UserSignIn(){
+		return "signin/signin.html";
+	}
+
+	@PostMapping("MemberCreate")
+	public String MemberCreate(){
+		return "login/signin.html";
+	}
+	
+	@RequestMapping(value = "Modify")
+	public ModelAndView UserModify(HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+	
+		Map<String,String> map= new HashMap<String, String>();
+		
+		map.put("mbId", session.getAttribute("id").toString());
+	
+		LoginDomain loginDomain = userService.mbSelectList(map);
+		mav.addObject("item",loginDomain);
+
+		mav.setViewName("member/memberDetail.html");
+		return mav;
+	}
+	
+	@PostMapping("MemberUpdate")
+	public ModelAndView MemberUpdate(LoginVO loginVO, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		
+		System.out.println(loginVO);
+		
+		LoginDomain loginDomain = null;
+		String IP = CommonUtils.getClientIP(request);
+		loginDomain = LoginDomain.builder()
+				.mbSeq(Integer.parseInt(loginVO.getSeq()))
+				.mbId(loginVO.getId())
+				.mbPw(loginVO.getPw())
+				.mbLevel(loginVO.getLevel())
+				.mbIp(IP)
+				.mbUse("Y")
+				.build();
+		System.out.println(loginDomain);
+		
+		userService.mbUpdate(loginDomain);
+		
+		mav.setViewName("redirect:Modify");
+		return mav;
+	}
+	
+	@RequestMapping(value = "MemberRemove")
+	public ModelAndView UserRemove(HttpServletRequest request) throws IOException{
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+	
+		Map<String,String> map= new HashMap<String, String>();
+		
+		map.put("mbId", session.getAttribute("id").toString());
+	
+		userService.mbRemove(map);
+		
+		mav.setViewName("redirect:/");
+		return mav;
+	}
 	
 	@RequestMapping(value = "album")
 	public ModelAndView login(LoginVO loginDTO, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -60,7 +129,7 @@ public class UserController {
 		
 		if(dupleCheck == 0) {  
 			String alertText = "없는 아이디이거나 패스워드가 잘못되었습니다. 가입해주세요";
-			String redirectPath = "/login/login";
+			String redirectPath = "/index.html";
 			CommonUtils.redirect(alertText, redirectPath, response);
 			return mav;
 		}
@@ -78,7 +147,7 @@ public class UserController {
 		System.out.println("items ==> " + items);
 		mav.addObject("items",items);
 		
-		mav.setViewName("board/album.html"); 
+		mav.setViewName("redirect:/AlbumList"); 
 		
 		return mav;
 	};

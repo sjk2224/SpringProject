@@ -92,49 +92,43 @@
   <body class="bg-body-tertiary">
     
 <div layout:fragment="content">
-<form role="form" action="upload" method="post" enctype="multipart/form-data">
+<form role="form" action="MemberUpdate" method="post" enctype="multipart/form-data">
 	<div class="container">
 	  <main>
 	    <div class="py-5">
-	      <h2>앨범 추가</h2>
+	      <h2>회원 정보</h2>
 	    </div>
 	
 	    <div class="row g-5">
 	      <div class="col-md-7 col-lg-8">
 	        <form class="needs-validation" novalidate>
 	          <div class="row g-3">
-	            <div class="col-sm-6">
-	              <label for="firstName" class="form-label">Song Title</label>
-	              <input type="hidden" name=Songseq placeholder="글번호" required/>
-                   <input type="text" class="form-control" id="firstName" placeholder="노래 제목" name="Songtitle" required>
-	            </div>
-	
-	            <div class="col-sm-6">
-	              <label for="lastName" class="form-label">Singer</label>
-	              <input type="text" name="SongSinger" class="form-control" placeholder="가수" required>
+	            <div class="col-12">
+            	 <input type="hidden" name="seq" id =Seq th:value="${item.mbSeq}"/>
+	             <input type="hidden" name="level" id =mbLebel th:value="${item.mbLevel}"/>
+	             <input type="hidden" name="admin" id =admin value="admin"/>
+	             <label for="firstName" class="form-label">회원 아이디</label>
+	                 <input type="text" class="form-control" name="id"  id="id" th:value="${item.mbId}" th:readonly="true" required>
 	            </div>
 	
 	            <div class="col-12">
-	              <label for="username" class="form-label">URL</label>
-	              <div class="input-group has-validation">
-	                <input type="text" name="SongURL" class="form-control" placeholder="URL" required>
-	              <div class="invalid-feedback">
-	                 	유튜브 URL
-	              </div>
-	             
-	              </div>
+	              <label for="lastName" class="form-label">비밀번호</label>
+	              <input type="text" name="pw" class="form-control" id="mbPw" th:value="${item.mbPw}"  placeholder="가수" required>
 	            </div>
-	            <label>썸내일 파일</label>
-	            <div>
-	              <input type="file" id="file" name="files" required/>
-	             </div>
-	          <button class="w-100 btn btn-primary btn-lg" type="submit">앨범 추가</button>
+	          <button class="w-100 btn btn-primary btn-lg" type="submit">비밀번호 변경</button>
+	          </div>
 	        </form>
 	      </div>
 	    </div>
 	  </main>
 	</div>
 </form>
+<form action="MemberRemove"  method="post" enctype="multipart/form-data">
+	<div class="row g-3">
+		<button class="w-100 btn btn-primary btn-lg" type="submit">회원 탈퇴</button>
+	</div>
+</form>
 </div>
   </body>
 </html>
+s

@@ -5,12 +5,12 @@
 
     <!-- selectId -->
 	<select id="mbSelectList" resultType="com.co.kr.domain.LoginDomain" parameterType="hashMap">
-	    SELECT * FROM jsp.member WHERE mb_seq=#{mbSeq}
+	    SELECT * FROM jsp.member WHERE mb_id=#{mbId}
 	</select>
 	
     <!-- selectAll -->
 	<select id="mbAllList" resultType="com.co.kr.domain.LoginDomain" parameterType="map">
-	    SELECT * FROM jsp.member order by mb_update_at desc limit #{offset}, #{contentnum}
+	    SELECT * FROM jsp.member order by mb_update_at desc limit #{offset}, #{URLnum}
 	</select>
 	
 	<!-- create -->
@@ -47,6 +47,6 @@
 	
 	<!-- delete -->
 	<delete id="mbRemove" parameterType="hashMap">
-	   DELETE FROM jsp.member WHERE mb_seq=#{mbSeq}
+	   DELETE FROM jsp.member WHERE mb_id=#{mbId}
 	</delete>
 </mapper>

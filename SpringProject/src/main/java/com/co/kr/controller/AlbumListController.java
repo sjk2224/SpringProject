@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -30,6 +31,7 @@ import com.co.kr.domain.AlbumListFileDomain;
 import com.co.kr.domain.AlbumURLDomain;
 import com.co.kr.exception.RequestException;
 import com.co.kr.service.UploadService;
+import com.co.kr.util.Pagination;
 import com.co.kr.vo.FileListVO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,16 +44,55 @@ public class AlbumListController {
 	private UploadService uploadService;
 	
 	@RequestMapping(value = "AlbumList")
-	public ModelAndView AlbumList() {
+	public ModelAndView AlbumList(HttpServletRequest request, @RequestParam(required = false) String page) {
 		ModelAndView mav = new ModelAndView();
-		List<AlbumListFileDomain> items = uploadService.albumFileViewList();
-		System.out.println("items ==> " + items);
 		
-		mav.addObject("items",items);
+		HttpSession session = request.getSession();
+		if(page == null)
+			page = "1";
 		
+		session.setAttribute("page", page);
+		
+		//
+		mav = AlbumListCall(request);
 		
 		mav.setViewName("board/album.html");
 		return mav;
+	}
+	
+	public ModelAndView AlbumListCall(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		
+		int totalcount = uploadService.albumFileViewList().size();
+		int URLnum = 12;
+		
+		boolean itemsNotEmpty;
+		
+		if(totalcount > 0) {
+			itemsNotEmpty = true;
+			
+			Map<String, Object> pagination = Pagination.pagination(totalcount, request);
+			
+			Map map = new HashMap<String, Integer>();
+				map.put("offset", pagination.get("offset"));
+				map.put("URLnum",URLnum);
+				
+			List<AlbumListFileDomain> items = uploadService.albumFileViewListPage(map);
+			System.out.println("items ==> " + pagination.get("rowNUM"));
+			System.out.println("items ==> " + items);
+			
+			mav.addObject("itemsNotEmpty", itemsNotEmpty);
+			mav.addObject("items",items);
+			mav.addObject("rowNUM", pagination.get("rowNUM"));
+			mav.addObject("pageNum", pagination.get("pageNum"));
+			mav.addObject("startpage", pagination.get("startpage"));
+			mav.addObject("endpage", pagination.get("endpage"));
+			
+		}else {
+			itemsNotEmpty = false;
+		}
+		return mav;
+		
 	}
 	
 	@RequestMapping(value = "Create")

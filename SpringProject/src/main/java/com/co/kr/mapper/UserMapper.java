@@ -33,7 +33,7 @@ public interface UserMapper {
     public void mbUpdate(LoginDomain loginDomain);
     
     //삭제
-    public HashMap<String, Object> mbRemove(Map<String, String> map);
+    public void mbRemove(Map<String, String> map);
     
 }
 

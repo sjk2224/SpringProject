@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -195,6 +196,12 @@ public class UploadServiceImple implements UploadService{
 	public List<AlbumListFileDomain> albumFileViewList() {
 		// TODO Auto-generated method stub
 		return uploadMapper.albumFileViewList();
+	}
+
+	@Override
+	public List<AlbumListFileDomain> albumFileViewListPage(Map<String, Integer> map) {
+		// TODO Auto-generated method stub
+		return uploadMapper.albumFileViewListPage(map);
 	}
 
 	

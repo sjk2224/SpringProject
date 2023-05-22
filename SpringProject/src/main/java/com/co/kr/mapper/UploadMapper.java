@@ -2,6 +2,7 @@ package com.co.kr.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -20,6 +21,9 @@ public interface UploadMapper {
 	
 	//Read (Album File) 
 	public List<AlbumListFileDomain> albumFileViewList();
+	
+	//Read (Album File Page) 
+	public List<AlbumListFileDomain> albumFileViewListPage(Map<String, Integer> map);	
 			
 	//Album insert
 	public void URLupload(AlbumURLDomain albumURLDomain);

@@ -19,7 +19,7 @@ public class Pagination {
 		HttpSession session = request.getSession();
 		String pnum = (String) session.getAttribute("page");
 		
-		System.out.println("pnum"+pnum);
+		System.out.println("pnum : "+pnum);
 		if (pnum == null) { pnum = "1"; }
 		
 		// 스트링을 인트로 파싱
@@ -28,10 +28,10 @@ public class Pagination {
 		
 		// 페이지네이션 범위정함 나머지 없거나 있으면 +1
 		int pageNum;
-		if (totalcount % 10 == 0) { 
-			pageNum = totalcount / 10; 
+		if (totalcount % 12 == 0) { 
+			pageNum = totalcount / 12; 
 		}else { 
-			pageNum = (totalcount / 10) + 1; 
+			pageNum = (totalcount / 12) + 1; 
 		}
 		if(rowNUM > pageNum) { rowNUM = pageNum; }
 		// 페이지네이션 중간범위 지정 -- 시작페이지 21번~27번 -- 끝페이지 30
@@ -43,7 +43,7 @@ public class Pagination {
 		if (endpage > pageNum) { endpage = pageNum; } 
 		
 		// 쿼리 범위 지정
-		int offset = (rowNUM - 1) * 10;
+		int offset = (rowNUM - 1) * 12;
 	
 		map.put("rowNUM", rowNUM);
 		map.put("pageNum", pageNum);
