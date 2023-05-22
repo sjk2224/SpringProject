@@ -21,7 +21,7 @@ public interface UploadService {
 	public List<AlbumFileDomain> albumFileList();
 	
 	//Read (Album File View)
-	public List<AlbumListFileDomain> albumFileViewList();
+	public List<AlbumListFileDomain> albumFileViewList(HashMap<String, String> map);
 	
 	//Read (Album File View Page)
 	public List<AlbumListFileDomain> albumFileViewListPage(Map<String, Integer> map);

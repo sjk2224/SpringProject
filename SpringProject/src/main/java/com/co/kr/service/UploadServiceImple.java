@@ -193,9 +193,10 @@ public class UploadServiceImple implements UploadService{
 	}
 
 	@Override
-	public List<AlbumListFileDomain> albumFileViewList() {
+	public List<AlbumListFileDomain> albumFileViewList(HashMap<String, String> map) {
 		// TODO Auto-generated method stub
-		return uploadMapper.albumFileViewList();
+		System.out.println("pass2");
+		return uploadMapper.albumFileViewList(map);
 	}
 
 	@Override

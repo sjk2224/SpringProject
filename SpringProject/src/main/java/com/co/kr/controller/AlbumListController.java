@@ -1,6 +1,7 @@
 package com.co.kr.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.DirectoryNotEmptyException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,27 +45,45 @@ public class AlbumListController {
 	private UploadService uploadService;
 	
 	@RequestMapping(value = "AlbumList")
-	public ModelAndView AlbumList(HttpServletRequest request, @RequestParam(required = false) String page) {
+	public ModelAndView AlbumList(HttpServletRequest request,
+			@RequestParam(required = false) String page,
+			@RequestParam(required = false) String searchWord) {
 		ModelAndView mav = new ModelAndView();
 		
 		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("id").toString());
+		
 		if(page == null)
 			page = "1";
 		
+		if(searchWord == null) {
+			searchWord = "%";
+		}
+	
+		System.out.println("search word : " + searchWord);
+		
 		session.setAttribute("page", page);
 		
-		//
-		mav = AlbumListCall(request);
+		mav = AlbumListCall(request,searchWord);
+		mav.addObject("mbId",session.getAttribute("id"));
+		mav.addObject("searchWord",searchWord);
 		
 		mav.setViewName("board/album.html");
 		return mav;
 	}
 	
-	public ModelAndView AlbumListCall(HttpServletRequest request) {
+	public ModelAndView AlbumListCall(HttpServletRequest request,String SearchWord) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		HashMap<String, String> searchWordMap = new HashMap<>();
 		
-		int totalcount = uploadService.albumFileViewList().size();
+		searchWordMap.put("searchWord", SearchWord);
+		searchWordMap.put("mbId", session.getAttribute("id").toString());
+		System.out.println("pass : " + searchWordMap);
+		
+		int totalcount = uploadService.albumFileViewList(searchWordMap).size();
 		int URLnum = 12;
+		System.out.println("item.size ==> " + totalcount);
 		
 		boolean itemsNotEmpty;
 		
@@ -76,9 +95,11 @@ public class AlbumListController {
 			Map map = new HashMap<String, Integer>();
 				map.put("offset", pagination.get("offset"));
 				map.put("URLnum",URLnum);
+				map.put("mbId", session.getAttribute("id").toString());
+				map.put("searchWord", SearchWord);
 				
 			List<AlbumListFileDomain> items = uploadService.albumFileViewListPage(map);
-			System.out.println("items ==> " + pagination.get("rowNUM"));
+			System.out.println("item.size ==> " + items.size());
 			System.out.println("items ==> " + items);
 			
 			mav.addObject("itemsNotEmpty", itemsNotEmpty);
@@ -216,6 +237,20 @@ public class AlbumListController {
 		}
 		mav.setViewName("redirect:/AlbumList");
 		
+		return mav;
+	}
+	
+	@PostMapping("Search")
+	public ModelAndView Search(@RequestParam String searchWord) throws IOException{
+		ModelAndView mav = new ModelAndView();
+		System.out.println("search word 1 : " +searchWord);
+		if(searchWord == null || searchWord == "") {
+			searchWord = "%";
+		}
+		String searchString= URLEncoder.encode(searchWord,"UTF-8");
+		String redicrectPath = "redirect:/AlbumList?page=1&searchWord=" + searchString;
+		System.out.println("Path : " + redicrectPath);
+		mav.setViewName(redicrectPath);
 		return mav;
 	}
 }

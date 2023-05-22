@@ -20,7 +20,7 @@ public interface UploadMapper {
 	public List<AlbumFileDomain> albumFileList();
 	
 	//Read (Album File) 
-	public List<AlbumListFileDomain> albumFileViewList();
+	public List<AlbumListFileDomain> albumFileViewList(HashMap<String, String> map);
 	
 	//Read (Album File Page) 
 	public List<AlbumListFileDomain> albumFileViewListPage(Map<String, Integer> map);	

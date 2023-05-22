@@ -51,8 +51,53 @@ public class UserController {
 	}
 
 	@PostMapping("MemberCreate")
-	public String MemberCreate(){
-		return "login/signin.html";
+	public ModelAndView MemberCreate(LoginVO loginVO, HttpServletRequest request, HttpServletResponse response) throws IOException{
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		
+		HashMap<String, String> map = new HashMap<String,String>();
+		map.put("mbId", loginVO.getId());
+		map.put("mbPw", loginVO.getPw());
+		
+		int dupleCheck = userService.mbDuplicationCheck(map);
+		System.out.println(dupleCheck);
+		
+		if(dupleCheck > 0) {
+			String alertText = "중복이거나 유효하지 않은 접근입니다.";
+			String redirectPath = "/main.do/signin";
+			System.out.println(loginVO.getAdmin());
+			if(loginVO.getAdmin() != null) {
+				redirectPath = "/main.do/AlbumList";
+			} 
+			CommonUtils.redirect(alertText, redirectPath, response);
+		}else {
+			
+			String IP = CommonUtils.getClientIP(request);
+			
+			int totalCount = userService.mbGetAll();
+			
+			LoginDomain loginDomain = LoginDomain.builder()
+					.mbId(loginVO.getId())
+					.mbPw(loginVO.getPw())
+					.mbLevel((totalCount == 0) ? "3" : "2")
+					.mbIp(IP)
+					.mbUse("Y")
+					.build();
+			
+			userService.mbCreate(loginDomain);
+			
+			if(loginVO.getAdmin() == null) {
+				session.setAttribute("ip", IP);
+				session.setAttribute("id", loginDomain.getMbId());
+				session.setAttribute("mbLevel",(totalCount==0) ? "3" : "2");
+				mav.setViewName("redirect:/AlbumList");
+			}else {
+				mav.setViewName("redirect:/AlbumList");
+			}
+		}
+		
+		return mav;
 	}
 	
 	@RequestMapping(value = "Modify")
@@ -129,7 +174,7 @@ public class UserController {
 		
 		if(dupleCheck == 0) {  
 			String alertText = "없는 아이디이거나 패스워드가 잘못되었습니다. 가입해주세요";
-			String redirectPath = "/index.html";
+			String redirectPath = "/main.do/";
 			CommonUtils.redirect(alertText, redirectPath, response);
 			return mav;
 		}
@@ -143,10 +188,6 @@ public class UserController {
 		session.setAttribute("id", loginDomain.getMbId());
 		session.setAttribute("mbLevel", loginDomain.getMbLevel());
 
-		List<AlbumListFileDomain> items = uploadService.albumFileViewList();
-		System.out.println("items ==> " + items);
-		mav.addObject("items",items);
-		
 		mav.setViewName("redirect:/AlbumList"); 
 		
 		return mav;

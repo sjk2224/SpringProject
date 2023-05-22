@@ -16,15 +16,15 @@
 	</select>
 	
 	<!--select all-->
-	<select id="albumFileViewList" resultType="com.co.kr.domain.AlbumListFileDomain">
+	<select id="albumFileViewList" parameterType="hashMap" resultType="com.co.kr.domain.AlbumListFileDomain">
 	  SELECT song_seq, mb_id, song_title, song_singer , song_url,song_create_at, song_update_at,up_original_file_name,up_new_file_name,up_file_path,up_file_size
-	  FROM jsp.view_songboard order by song_update_at desc
+	  FROM jsp.view_songboard where mb_id=#{mbId} and (song_title like CONCAT('%',#{searchWord},'%') or song_singer like CONCAT('%',#{searchWord},'%'))order by song_update_at desc
 	</select>
 	
 	<!--select all-->
 	<select id="albumFileViewListPage" resultType="com.co.kr.domain.AlbumListFileDomain"  parameterType="map">
 	  SELECT song_seq, mb_id, song_title, song_singer , song_url,song_create_at, song_update_at,up_original_file_name,up_new_file_name,up_file_path,up_file_size
-	  FROM jsp.view_songboard order by song_update_at desc limit #{offset}, #{URLnum}
+	  FROM jsp.view_songboard where mb_id=#{mbId} and (song_title like CONCAT('%',#{searchWord},'%') or song_singer like CONCAT('%',#{searchWord},'%'))order by song_update_at desc limit #{offset}, #{URLnum}
 	</select>
 	
 	<insert id="URLupload" parameterType="com.co.kr.domain.AlbumURLDomain"
