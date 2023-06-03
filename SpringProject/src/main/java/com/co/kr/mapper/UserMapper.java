@@ -11,7 +11,7 @@ import com.co.kr.domain.LoginDomain;
 @Mapper
 public interface UserMapper {
 	
-	//전체 리스트 조회
+	//리스트 조회
     public LoginDomain mbSelectList(Map<String, String> map);
     
     //신규 저장
