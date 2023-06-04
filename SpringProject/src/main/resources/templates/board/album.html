@@ -135,7 +135,7 @@
 <nav aria-label="Page navigation example">
 <div th:if=${itemsNotEmpty} class="pagination" style="margin-left:10px">
   <ul class="pagination align-self-center">
-  	<th:block th:if="${startpage} <= ${endpage}">
+  	<th:block th:if="${startpage} < ${pageNum}">
 	    <li class="page-item">
 	    	<a class="page-link" th:href="@{AlbumList(page=${1},searchWord=${searchWord})}">처음으로</a>
 	    </li>
@@ -148,13 +148,13 @@
 	    <li class="page-item disabled">
 	    	<a class="page-link" th:text="${rowNUM}" th:href="@{AlbumList(page=${rowNUM})}">3</a>
 	    </li>
-	    <li class="page-item" th:if="${rowNUM + 1} <= ${endpage}" style="display: disable;">
+	    <li class="page-item" th:if="${rowNUM + 1} <= ${pageNum}" style="display: disable;">
 	    	<a class="page-link" th:text="${rowNUM + 1}" th:href="@{AlbumList(page=${rowNUM + 1},searchWord=${searchWord})}">4</a>
     	</li>
-	    <li class="page-item" th:if="${rowNUM + 2} <= ${endpage}" style="display: disable;">
+	    <li class="page-item" th:if="${rowNUM + 2} <= ${pageNum}" style="display: disable;">
 	    	<a class="page-link" th:text="${rowNUM + 2}" th:href="@{AlbumList(page=${rowNUM + 2},searchWord=${searchWord})}">5</a>
 	    </li>
-	    <li class="page-item"><a class="page-link" th:href="@{AlbumList(page=${endpage},searchWord=${searchWord})}">끝으로</a></li> 
+	    <li class="page-item"><a class="page-link" th:href="@{AlbumList(page=${pageNum},searchWord=${searchWord})}">끝으로</a></li> 
      </th:block>
   </ul>
 </div>

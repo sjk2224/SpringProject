@@ -99,7 +99,6 @@ public class AlbumListController {
 				map.put("searchWord", SearchWord);
 				
 			List<AlbumListFileDomain> items = uploadService.albumFileViewListPage(map);
-			System.out.println("endpage==> " + pagination.get("endpage"));
 			System.out.println("items ==> " + items);
 			
 			mav.addObject("itemsNotEmpty", itemsNotEmpty);
@@ -107,7 +106,6 @@ public class AlbumListController {
 			mav.addObject("rowNUM", pagination.get("rowNUM"));
 			mav.addObject("pageNum", pagination.get("pageNum"));
 			mav.addObject("startpage", pagination.get("startpage"));
-			mav.addObject("endpage", pagination.get("endpage"));
 			
 		}else {
 			itemsNotEmpty = false;

@@ -37,10 +37,6 @@ public class Pagination {
 		// 페이지네이션 중간범위 지정 -- 시작페이지 21번~27번 -- 끝페이지 30
 		int temp = (rowNUM - 1) % 10; // 0,1,2 나머지 값
 		int startpage = rowNUM - temp; // temp는 startpage보다 끝자리 항상 1작음 27-6
-		int endpage = startpage + (10-1); // 10 20 30 40
-	
-		// startpage기준 무조건 +9 한 것이어서 pageCount 비교 후 pageCount 적용
-		if (endpage > pageNum) { endpage = pageNum; } 
 		
 		// 쿼리 범위 지정
 		int offset = (rowNUM - 1) * 12;
@@ -48,7 +44,6 @@ public class Pagination {
 		map.put("rowNUM", rowNUM);
 		map.put("pageNum", pageNum);
 		map.put("startpage", startpage);
-		map.put("endpage", endpage);
 		map.put("offset", offset);
 
 		return map;
