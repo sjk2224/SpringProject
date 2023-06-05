@@ -26,7 +26,7 @@
 	
 	<!-- duplicationCheck -->
 	<select id="mbDuplicationCheck" resultType="int" parameterType="hashMap">
-	   SELECT COUNT(*) FROM jsp.member WHERE mb_id=#{mbId} AND mb_pw=#{mbPw}
+	   SELECT COUNT(*) FROM jsp.member WHERE mb_id=#{mbId} OR mb_pw=#{mbPw}
 	</select>
 
 	<!-- mbGetId -->	
