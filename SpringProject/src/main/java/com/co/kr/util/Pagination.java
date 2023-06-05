@@ -34,16 +34,12 @@ public class Pagination {
 			pageNum = (totalcount / 12) + 1; 
 		}
 		if(rowNUM > pageNum) { rowNUM = pageNum; }
-		// 페이지네이션 중간범위 지정 -- 시작페이지 21번~27번 -- 끝페이지 30
-		int temp = (rowNUM - 1) % 10; // 0,1,2 나머지 값
-		int startpage = rowNUM - temp; // temp는 startpage보다 끝자리 항상 1작음 27-6
 		
 		// 쿼리 범위 지정
 		int offset = (rowNUM - 1) * 12;
 	
 		map.put("rowNUM", rowNUM);
 		map.put("pageNum", pageNum);
-		map.put("startpage", startpage);
 		map.put("offset", offset);
 
 		return map;

@@ -135,7 +135,7 @@
 <nav aria-label="Page navigation example">
 <div th:if=${itemsNotEmpty} class="pagination" style="margin-left:10px">
   <ul class="pagination align-self-center">
-  	<th:block th:if="${startpage} < ${pageNum}">
+  	<th:block th:if="1 < ${pageNum}">
 	    <li class="page-item">
 	    	<a class="page-link" th:href="@{AlbumList(page=${1},searchWord=${searchWord})}">처음으로</a>
 	    </li>

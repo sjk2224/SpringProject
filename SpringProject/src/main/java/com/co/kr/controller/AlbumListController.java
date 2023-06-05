@@ -105,7 +105,6 @@ public class AlbumListController {
 			mav.addObject("items",items);
 			mav.addObject("rowNUM", pagination.get("rowNUM"));
 			mav.addObject("pageNum", pagination.get("pageNum"));
-			mav.addObject("startpage", pagination.get("startpage"));
 			
 		}else {
 			itemsNotEmpty = false;
