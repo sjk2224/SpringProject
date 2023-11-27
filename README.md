@@ -1,4 +1,4 @@
-# SpringProject
+# URL 모음집
 
 자기가 원하는 URL 저장소
 
@@ -15,7 +15,7 @@
 ### Thymeleaf 			            - 3.0.11 RELEASE version 
 
 # DB 설계
-
+![포폴-8](https://github.com/sjk2224/SpringProject/assets/127715484/ecd202cc-d906-47fd-bdd0-a32f20fcac14)
 
 ### 뷰코드
 ```sql
@@ -38,28 +38,41 @@ VIEW `view_songboard` AS
     WHERE
         ((`b`.`song_seq` = `f`.`song_seq`)
             AND (`b`.`mb_id` = `f`.`mb_id`))
-``` 
-프로젝트 시연 화면
+```   
+
+
+
+
+      
+# 프로젝트 시연 화면
 
 ### 1. 로그인 화면
-![포폴-1](https://github.com/sjk2224/SpringProject/assets/127715484/afc2fd38-a127-4c4b-b6ec-f23c7681e559)
+![포폴-1](https://github.com/sjk2224/SpringProject/assets/127715484/afc2fd38-a127-4c4b-b6ec-f23c7681e559)  
+아이디와 비밀번호 입력후 로그인 버튼 클릭시 메인으로 이동  
+회원 가입 버튼 클릭시 회원가입 페이지 이동  
 
 ### 2. 회원가입 화면
-![포폴-2](https://github.com/sjk2224/SpringProject/assets/127715484/96afe0c2-bf5d-4e9c-a6d8-8fa98bd25d6c)
+![포폴-2](https://github.com/sjk2224/SpringProject/assets/127715484/96afe0c2-bf5d-4e9c-a6d8-8fa98bd25d6c)  
+아이디와 비밀번호 입력 후 회원 가입 버튼 클릭시 중복 검사 후 회원가입   
 
 ### 3. 메인 화면 설명
-![포폴-3](https://github.com/sjk2224/SpringProject/assets/127715484/a3ea5d27-ab7e-471d-b6de-654c9f3053bf)
+![포폴-3](https://github.com/sjk2224/SpringProject/assets/127715484/a3ea5d27-ab7e-471d-b6de-654c9f3053bf)  
+좌측메뉴바)  
+Dashboard: 클릭시 메인화면으로 이동  
+Create: 클릭시 앨범 생성 창으로 이동  
+Member Info: 클릭시 회원 정보화면으로 이동  
+Logout: 클릭시 로그 아웃  
 
 ### 3-1. 검색 후 결과 반영된 메인화면
-![포폴-4](https://github.com/sjk2224/SpringProject/assets/127715484/332870cb-ada4-4029-8a78-659f7516615c)
+![포폴-4](https://github.com/sjk2224/SpringProject/assets/127715484/332870cb-ada4-4029-8a78-659f7516615c)  
 
 ### 4. 앨범 추가 화면
-![포폴-5](https://github.com/sjk2224/SpringProject/assets/127715484/c88959b9-efd0-4e98-8af2-88c067a681af)
+![포폴-5](https://github.com/sjk2224/SpringProject/assets/127715484/c88959b9-efd0-4e98-8af2-88c067a681af)  
 
 ### 4. 수정 화면 설명
-![포폴-6](https://github.com/sjk2224/SpringProject/assets/127715484/3ea21d51-89bf-4b63-a2fa-a86ac74c2302)
+![포폴-6](https://github.com/sjk2224/SpringProject/assets/127715484/3ea21d51-89bf-4b63-a2fa-a86ac74c2302)  
 
 ### 5. 회원 정보 화면 설명
-![포폴-7](https://github.com/sjk2224/SpringProject/assets/127715484/ec92b231-9773-4b4c-9b35-966d5265b00b)
+![포폴-7](https://github.com/sjk2224/SpringProject/assets/127715484/ec92b231-9773-4b4c-9b35-966d5265b00b)  
 
 
