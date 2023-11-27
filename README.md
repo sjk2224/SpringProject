@@ -2,6 +2,19 @@
 
 자기가 원하는 URL 저장소
 
+# 기술스택
+### Java 				                 – 11.0.21 version  
+### MySql 				               - 8.0.32
+### SpringBoot 			             - 2.7.9 version
+### Mybatis 			               – 3.5.7 version
+### Mybatis-spring 			         – 2.0.7 version
+### Mybatis-spring-boot-starter – 2.3.0 version
+### Lombok 			                – 1.18.26 version
+### Commons-dbcp2 		          – 2.8.0 version
+### Spring-boot-starter-jdbc 	  – 3.0.4 version
+### Thymeleaf 			            - 3.0.11 RELEASE version 
+
+
 프로젝트 시연 화면
 
 ### 1. 로그인 화면
@@ -26,14 +39,3 @@
 ![포폴-7](https://github.com/sjk2224/SpringProject/assets/127715484/ec92b231-9773-4b4c-9b35-966d5265b00b)
 
 
-# 기술스택
-### Java 				                 – 11.0.21 version  
-### MySql 				               - 8.0.32
-### SpringBoot 			             - 2.7.9 version
-### Mybatis 			               – 3.5.7 version
-### Mybatis-spring 			         – 2.0.7 version
-### Mybatis-spring-boot-starter – 2.3.0 version
-### Lombok 			                – 1.18.26 version
-### Commons-dbcp2 		          – 2.8.0 version
-### Spring-boot-starter-jdbc 	  – 3.0.4 version
-### Thymeleaf 			            - 3.0.11 RELEASE version 
