@@ -14,7 +14,31 @@
 ### Spring-boot-starter-jdbc 	  – 3.0.4 version
 ### Thymeleaf 			            - 3.0.11 RELEASE version 
 
+# DB 설계
 
+
+### 뷰코드
+```sql
+VIEW `view_songboard` AS
+    SELECT 
+        `b`.`song_seq` AS `song_seq`,
+        `b`.`mb_id` AS `mb_id`,
+        `b`.`song_title` AS `song_title`,
+        `b`.`song_singer` AS `song_singer`,
+        `b`.`song_url` AS `song_url`,
+        `b`.`song_create_at` AS `song_create_at`,
+        `b`.`song_update_at` AS `song_update_at`,
+        `f`.`up_original_file_name` AS `up_original_file_name`,
+        `f`.`up_new_file_name` AS `up_new_file_name`,
+        `f`.`up_file_path` AS `up_file_path`,
+        `f`.`up_file_size` AS `up_file_size`
+    FROM
+        (`songboard` `b`
+        JOIN `songfiles` `f`)
+    WHERE
+        ((`b`.`song_seq` = `f`.`song_seq`)
+            AND (`b`.`mb_id` = `f`.`mb_id`))
+``` 
 프로젝트 시연 화면
 
 ### 1. 로그인 화면
